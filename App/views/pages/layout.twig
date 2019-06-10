@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com -->
+	<title>KOURO STYLE</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />	
+	<link rel="stylesheet" type="text/css" href="./public/css/main.css">
+</head>
+<body id="myPage" >
+<div id="preto">
+    <nav id="menuTopo">
+        <div id="menu_button_content">
+            <div id="menu_button">
+                Menu
+                <div id="iconeMobile">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <ul id="menu_list">
+            <li><a href="#myPage" class="menu_ativo">INICIO</a></li>
+            <li><a href="#concurso">O CONCURSO</a></li>
+            <li><a href="#sobre">SOBRE</a></li>
+            <li><a href="#regras">REGRAS</a></li>
+            <li><a href="#inscricao">INSCRIÇÃO</a></li>
+        </ul>
+    </nav>
+    <img src="./public/img/logo.png" class="imgText">
+    <img src="./public/img/banner.jpg" class="imgtopo" />
+
+    <div class="corpoCont"> 
+        {% block content %}{% endblock %}             
+    </div>
+    <footer class="text-center">
+        <div class="retangulo_rodape"></div>        
+    </footer>
+</div>
+<script type="text/javascript" language="javascript" src="./public/js/jquery-3.4.0.min.js"></script>
+<script>
+//Ações para esconder e mostrar o menu quando está em mobile
+$("#menu_button").click(function(){
+	if($('#menu_list:visible').length == 0){
+		$("#menu_list").show();
+	}
+	else{
+		$("#menu_list").hide();		
+	}
+});
+$("#menu_list").click(function(){
+	if($('#menu_button:visible').length != 0){
+		$("#menu_list").hide();
+	}
+});
+
+// Diferenciar por class o menu quando estiver totalmente no topo
+window.addEventListener("scroll", function() {
+  var menu = document.getElementById("menuTopo");
+
+  if (window.pageYOffset > 0) {
+    menu.classList.add("visivel");
+  } else {
+    menu.classList.remove("visivel");
+  }
+});
+
+//Funções com o carregamento da pagina
+$( document ).ready(function() {	
+	
+});	
+</script>
+
+</body>
+</html>

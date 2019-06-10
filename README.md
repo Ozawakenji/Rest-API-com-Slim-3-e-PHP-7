@@ -33,6 +33,15 @@ Acessar o painel de controle do xampp e iniciar o apache e o mysql.
 Rodar o phpmyadmin, criar um banco com o nome "gestaovendas" e importar o conteúdo do arquivo "gestaovendas.sql" que está na raíz do repositório.
 Para acessar o sistema, abra o navegador e entre com "localhost/gestaovendas"
 
+Os logins para teste do sistema são :  
+
+login = kozawa@gmail.com
+senha = 123456
+
+login = felipec@gmail.com
+senha = 123456
+
+
 
       
       

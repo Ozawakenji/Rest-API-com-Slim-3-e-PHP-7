@@ -5,11 +5,9 @@ Sistema simples de gestão de vendas, simulando a venda de algum produto e alter
 com php 7. Possui uma interface básica mais focado no back-end utilizando MVC. É utilizado o TWIG para redenrizar as páginas.
 
 OBJETIVO
-
 Simular um sistema de vendas utilizando o Slim framework com PHP, usando a arquitetura MVC e codigo OO.
 
 Ferramentas Utilizadas:
-
  -Xampp 7.3.4
  -Slim framework 3      
  -PHP 7.3.4
@@ -29,7 +27,6 @@ Ferramentas Utilizadas:
 
 
 INSTALAÇÃO 
-
 Será necesário a utilização do XAMPP (ou outro similar com suporte PHP), por utilizar o PHP e o SGBD Mysql.
 Após instalado o XAMPP, deverá fazer o download do repositório e colocado na pasta "htdocs", deverá ficar dessa forma "htdocs/gestaovendas/"
 Acessar o painel de controle do xampp e iniciar o apache e o mysql.

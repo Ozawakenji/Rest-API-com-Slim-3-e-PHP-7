@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 10-Jun-2019 às 09:05
+-- Generation Time: 11-Jun-2019 às 01:46
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 7.3.4
 
@@ -31,8 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `carrinho` (
   `id` int(10) UNSIGNED NOT NULL,
   `idusuario` int(11) NOT NULL,
-  `idproduto` int(11) NOT NULL,
-  `quantidade` int(11) NOT NULL
+  `idproduto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -47,6 +46,15 @@ CREATE TABLE `produtos` (
   `quantidade` int(11) NOT NULL,
   `imagem` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `nome`, `quantidade`, `imagem`) VALUES
+(1, 'Colar 1978', 313, 'colar_1978.jpg'),
+(2, 'Colar ASA', 548, 'colar_asa.jpg'),
+(3, 'Pulseira X', 111, 'pulseira_x.jpg');
 
 -- --------------------------------------------------------
 
@@ -83,6 +91,63 @@ CREATE TABLE `vendas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Extraindo dados da tabela `vendas`
+--
+
+INSERT INTO `vendas` (`id`, `idprodutos`, `idusuario`) VALUES
+(1, 1, 1),
+(2, 3, 1),
+(3, 2, 1),
+(4, 2, 1),
+(5, 1, 1),
+(6, 3, 1),
+(7, 2, 1),
+(8, 1, 1),
+(9, 3, 1),
+(10, 2, 1),
+(11, 1, 1),
+(12, 3, 1),
+(13, 1, 1),
+(14, 3, 1),
+(15, 2, 1),
+(16, 1, 1),
+(17, 2, 1),
+(18, 3, 1),
+(19, 1, 1),
+(20, 2, 1),
+(21, 3, 1),
+(22, 3, 1),
+(23, 3, 1),
+(24, 2, 1),
+(25, 2, 1),
+(26, 1, 1),
+(27, 1, 1),
+(28, 3, 1),
+(29, 2, 1),
+(30, 3, 1),
+(31, 2, 1),
+(32, 1, 1),
+(33, 1, 1),
+(34, 1, 1),
+(35, 2, 1),
+(36, 2, 1),
+(37, 3, 1),
+(38, 1, 1),
+(39, 3, 1),
+(40, 2, 1),
+(41, 1, 1),
+(42, 2, 1),
+(43, 1, 1),
+(44, 1, 1),
+(45, 2, 1),
+(46, 3, 1),
+(47, 2, 1),
+(48, 1, 1),
+(49, 1, 1),
+(50, 1, 1),
+(51, 2, 1);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -108,9 +173,7 @@ ALTER TABLE `usuario`
 -- Indexes for table `vendas`
 --
 ALTER TABLE `vendas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_vendas_idprodutos_produtos_id` (`idprodutos`),
-  ADD KEY `fk_vendas_idusuario_usuario_id` (`idusuario`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -120,13 +183,13 @@ ALTER TABLE `vendas`
 -- AUTO_INCREMENT for table `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `usuario`
@@ -138,7 +201,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables

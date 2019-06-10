@@ -15,6 +15,12 @@
 
             return $produtos;
         }
+        public function updateProduto($idproduto)
+        {
+            $produtos = $this->pdo->query("UPDATE produtos SET quantidade = quantidade-1 WHERE id ={$idproduto};");
+
+            return $produtos;
+        }
 
     }
 

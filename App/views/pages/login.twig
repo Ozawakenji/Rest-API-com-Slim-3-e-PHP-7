@@ -1,0 +1,15 @@
+{% extends "/pages/layout.twig" %}
+{% block content %}
+<div id="logincont">
+<form method="post" id="formlogin" action="{{path_for('login')}}" >
+<table width="25%" align="center" cellpadding="5" cellspacing="0" style="-webkit-border-vertical-spacing: 40px;"  style="border:#E7E7E7 solid 1px;">
+<tr align="center" id="tituloscol">
+  <td width="49">Email:<u></u>: </td><td width="168" align="left"><input type="text" name="email" value="" required /> </td></tr>
+<tr align="center" id="tituloscol">
+  <td width="49">Senha:<u></u>: </td><td width="168" align="left"><input type="password" name="senha" required /> </td></tr>  
+  <tr align="center" id="tituloscol">
+  <td colspan="2" align="right"><input type="submit" value="Entrar" /> </td></tr>  
+</table>
+</form>
+</div>
+{% endblock %}

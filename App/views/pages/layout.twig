@@ -4,8 +4,10 @@
   <!-- Theme Made By www.w3schools.com -->
 	<title>KOURO STYLE</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />	
-	<link rel="stylesheet" type="text/css" href="./public/css/main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  {% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{name}}/public/css/main.css">
+  {% endblock %}
 </head>
 <body id="myPage" >
 <div id="preto">
@@ -14,7 +16,7 @@
             <div id="menu_button">
                 Menu
                 <div id="iconeMobile">
-                    <span></span>
+                    <span>{{ dir }}</span>
                     <span></span>
                     <span></span>
                 </div>
@@ -23,24 +25,24 @@
         </div>
 
         <ul id="menu_list">
-            <li><a href="#myPage" class="menu_ativo">INICIO</a></li>
-            <li><a href="#concurso">O CONCURSO</a></li>
-            <li><a href="#sobre">SOBRE</a></li>
-            <li><a href="#regras">REGRAS</a></li>
-            <li><a href="#inscricao">INSCRIÇÃO</a></li>
+            <li><a id="iniciomenu" href="{{name}}index.php" class="menu_ativo">INICIO</a></li>
+            <li><a id="compras" href="{{name}}index.php/compras">CARRINHO</a></li>
+            <li><a id="loginmenu" href="{{name}}index.php/login">LOGIN</a></li>
         </ul>
     </nav>
-    <img src="./public/img/logo.png" class="imgText">
-    <img src="./public/img/banner.jpg" class="imgtopo" />
+    <img src="{{name}}/public/img/logo.png" class="imgText">
+    <img src="{{name}}/public/img/banner.jpg" class="imgtopo" />
 
-    <div class="corpoCont"> 
-        {% block content %}{% endblock %}             
+    <div class="corpoCont">
+    <input type="hidden" id="sessao" value="{{session.id}}">
+                 {% block content %}
+                 {% endblock %}
     </div>
     <footer class="text-center">
         <div class="retangulo_rodape"></div>        
     </footer>
 </div>
-<script type="text/javascript" language="javascript" src="./public/js/jquery-3.4.0.min.js"></script>
+<script type="text/javascript" language="javascript" src="{{name}}/public/js/jquery-3.4.0.min.js"></script>
 <script>
 //Ações para esconder e mostrar o menu quando está em mobile
 $("#menu_button").click(function(){
@@ -68,10 +70,91 @@ window.addEventListener("scroll", function() {
   }
 });
 
+$("#formlogin").on( "submit", function(){
+   
+});
+
 //Funções com o carregamento da pagina
-$( document ).ready(function() {	
-	
+$( document ).ready(function() {
+     var idusuario = $("#sessao").attr("value");
+    $.get("index.php/produto",function(data){
+        var html = "<h1>PRODUTOS</h1><div class='divfotos'>";
+		for (var x = 0; x < data.length; x++){
+		    html += "<div><img class='fotos' src='{{name}}public/fotos/"+(data[x]['imagem'])+"'><h2>"+(data[x]['nome'])+" </h2><div>Quantidade disponível:"+(data[x]['quantidade'])+"</div><button type='button' class='botaoCarrinho' id='"+(data[x]['id'])+"' >Adicionar ao carrinho!</button></div>";
+		}
+		html += "</div>";
+        $("#textFullW").append(html);
+    });   
+
+    var pageURL = $(location).attr("href");
+    var valoresURL =   pageURL.split("?");
+    if(valoresURL.length > 1){
+        var parametros = valoresURL[1].split("&");
+        if(parametros.length == 1){
+            var valorID = parametros[0].split("=");
+            var idusuario = valorID[1];
+            if(idusuario >=1){
+                
+                $("#sessao").attr("value", valorID[1]);
+                $("#compras").attr("href",  $("#compras").attr("href")+"?id="+valorID[1]);
+                $("#iniciomenu").attr("href",  $("#iniciomenu").attr("href")+"?id="+valorID[1]);
+                $("#loginmenu").text("LOGOUT");
+
+                $.post("carrinhos/", {'idusuario' : idusuario}, function(data){
+                    var html = "<h1>Seu Carrinho</h1><div class='divcarrinho'>";
+                    
+                    for (var x = 0; x < data.length; x++){
+                        html += "<div>"+(data[x]['nome'])+"<input type='hidden' id='userConf-"+(data[x]['id'])+"'  value='"+(data[x]['idusuario'])+"' > <input type='hidden' id='produtoConf-"+(data[x]['id'])+"' value='"+(data[x]['idproduto'])+"' >  <button type='button' class='removeCarrinho' id='"+(data[x]['id'])+"' >Remover do carrinho!</button></div>";
+                    }
+
+                    html += "<button class='confirmabutton' id='confirmarcompra' >Confirme a compra!</button></div>";
+                    $("#textFullW2").append(html);
+                    
+                });
+            }          
+        }
+        else{
+            alert("Faça o login para efetuar as compras!");
+        }       
+    }
+    else{
+        alert("Faça o login para efetuar as compras!");
+    }
+    $(document).on('click', "button.botaoCarrinho", function() {
+        var id = $(this).attr("id");
+         var idusuario = $("#sessao").attr("value");       
+        $.post("index.php/carrinho", {'idusuario' : idusuario, 'idproduto' : id},function(data){
+            alert("Foi adicionado ao carrinho");
+            var pageURL = $(location).attr("href");
+            window.location.href = pageURL;
+        });
+    });
+
+    $(document).on('click', "button.removeCarrinho", function() {
+        var id = $(this).attr("id");       
+        $.post("deletacarrinho/", {'id' : id},function(data){
+            alert("Foi removido com sucesso!");
+            var pageURL = $(location).attr("href");
+            window.location.href = pageURL;
+        });
+    });
+
+    $(document).on("click", "button.confirmabutton", function(){
+        $( ".removeCarrinho" ).each(function() {
+            var id= $(this).attr('id');
+            var iduser= $("#userConf-"+id).attr("value");
+            var idproduto= $("#produtoConf-"+id).attr("value");            
+            $.post("vendas/", {'idcarrinho': id, 'idusuario' : iduser, 'idproduto': idproduto}, function(data){
+                    alert("Compra concluida com sucesso!");                
+            });            
+                     
+        });
+        
+       
+    });
+     
 });	
+ 
 </script>
 
 </body>

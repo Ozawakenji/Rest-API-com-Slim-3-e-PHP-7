@@ -31,14 +31,14 @@ ul {
 h1 {
     font-family: Lato;
     font-size: 24px;
-    color: #1b546f;
+    color: rgb(110, 65, 23, 0.8);
     margin-bottom: 30px
 }
 
 h2 {
     font-size: 18px;
     font-family: "Arial";
-    color: rgb(46, 142, 188);
+    color: rgb(110, 65, 23, 0.8);
     line-height: 1.2;
 }
 
@@ -228,6 +228,25 @@ nav ul li a:hover {
     cursor: pointer;
 }
 
+.botaoCarrinho{
+    border-radius: 5px;
+    color: white;
+    background-color: darkseagreen;
+    max-width: 70%;
+    padding: 2%;
+}
+
+.fotos{
+    width: 70%;
+    max-width: 300px;
+}
+.divfotos{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    width: 100%;
+    padding: 10%;
+}
+
 .botao_inscrivase:hover {
     background-color: #287da4;
     box-shadow: 0px 3px 8px 6px rgba(51, 52, 64, 0.25);
@@ -294,6 +313,40 @@ nav ul li a:hover {
     padding: 0% 10% 0% 10%;
     text-align: left;
 }
+
+#textFullW2 {
+    width: 100%;
+}
+
+#textFullW2 p {
+    font-size: 19px;
+    color: #666;
+    padding: 0% 10% 0% 10%;
+}
+
+#regras #textFullW2 p {
+    font-size: 19px;
+    color: #666;
+    padding: 0% 10% 0% 10%;
+    text-align: left;
+}
+
+.divcarrinho {
+    padding: 4%;
+}
+.removeCarrinho{
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.confirmabutton{
+    background-color: darkseagreen;
+    margin-top: 6%;
+    padding: 1%;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
 
 
 
@@ -534,6 +587,18 @@ td {
         font-size: 18px;
         text-align: justify !important;
         padding: 10px;
+    }
+    #textFullW2 p {
+        font-size: 18px;
+        text-align: justify !important;
+        padding: 10px;
+    }
+
+    .divcarrinho {
+        padding: 4%;
+    }
+    .removeCarrinho{
+        margin:2%;
     }
 
     #textconcurso2 {
